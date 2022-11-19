@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Review Sentiment Analysis</title>
+    </head>
+    <!--<h1> Hello World!</h1>-->
+    <h1>Hello World!</h1>
+    <body>
+        <h3>--- Review Sentiment Analysis ---</h3>
+        <!--<form method="post", enctype="multipart/form-data" action="predictSentiment">-->
+            <form method="post" action="predictSentiment">
+                {% csrf_token %}
+                <div>
+                    <input id="review_text" name="review_text" type="text" value={{temp.text}}>
+                    <br>
+                    <br>
+                    <input type="submit" value="Submit">
+                </div>   
+            </form>
+        <br>
+        {% if scoreval %}
+        <h1>Review is {{scoreval}}</h1>
+        {% endif %}
+    </body>
+</html>

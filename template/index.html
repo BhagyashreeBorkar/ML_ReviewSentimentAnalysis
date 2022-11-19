@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<title>Sentiment Analysis</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'TRADE_SENSE_APP/z_dashboard.css' %}">-->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/index_style.css' %}">
+
+	</head>
+	<body>
+		<div class='odinMainContainer'>
+			<div class='odinLeftSidebarContainer'>
+				<div class='topCenter'>
+					<table>
+						<tr>
+						  <!--{% load static %}-->
+						  <td class="app-name">Review Sentiment Analysis
+						  </td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!-- Sub Title Content Area -->
+			<div class='odinSubMainContentContainer'>
+				<div class="topSecondRow">
+					<table>
+						<tr>
+							<td style="font-size: 16px; width:15px; text-align:left;" ><b> Homepage </b></td> 
+						</tr>
+					</table>
+				</div>
+			</div>
+		  <!-- Main Content Area -->
+			<div class='odinMainContentContainer'>
+				<div style="width: 99%;">
+					<div class="col1">
+						<table>
+							<tr class= "row1">
+								<td>
+									<p>Enter the review to check whether it is <b style="color:green;">Positive</b> or <b style="color:#b21616;">Negative</b></p>
+								</td>
+							</tr>
+							<form method="post" action="predictSentiment">
+								{% csrf_token %}
+								{{temp.text}}
+								<tr class= "right_row1">
+									<td>
+										<textarea id="review_text" name="review_text" type="textarea" value="{{temp_label.text}}" placeholder="It was a good movie :)"></textarea>
+									</td>
+								</tr>
+								<br>
+								<tr>
+									<td style="text-align:center; background-color:white;padding:10px;width:70%">
+										<button type="submit">Submit</button>
+									</td>
+								</tr>
+							</form>
+							
+						</table>
+						<!---------- -->
+						{% if scoreval %}
+						<div class="col1">
+							<table style="width:60%;margin-left:25%;margin-right:15%;">
+								<tr>
+									<th style="color:white; font-size:20px;background-color:#004846;">Review</th>
+								</tr>
+								<tr style="color:black; font-size:15px;">
+									<td style="color:black; font-size:15px;padding:5px 5px;margin:2px;">{{review_text}}</td>
+									<td style="color:black; font-size:15px;padding:5px 5 px;margin:10px;">{% if scoreval == "Positive" %}
+										<img src="{% static 'images/Green-thumbs-up1.png' %}" alt="My image">
+									{% elif scoreval == "Negative" %}
+										<img src="{% static 'images/Red-thumbs-down.png' %}" alt="My image">
+									{% endif %}</td>
+								</tr>
+							</table>
+						</div>
+						{% endif %}
+						
+						<!--------- -->
+						<br>
+						<hr>
+						<div style="text-align:right">
+							<tr class= "right_row_indicator">
+								<td><b>Indicators : </b></td>
+								<td>Positive <span class="dot" ></span> </td>
+								<td>Negative <span class="dot" style="background-color:#b21616"></span></td>
+								<!--<td>Neutral <span class="dot" style="background-color:orange"></span></td>-->
+							</tr>
+						</div>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>      
+	</body>
+</html>
